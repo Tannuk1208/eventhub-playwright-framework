@@ -1,0 +1,16 @@
+{
+    "invalidEmails" : [
+        "abc",
+        "test@",
+        "@gmail.com",
+        "testgmail.com",
+        "abc.gmail.com"
+    ],
+    "invalidPhones" : [
+        "123",
+        "9999",
+        "qbcdefghij",
+        "9876543",
+        "123456789"
+    ]
+}
