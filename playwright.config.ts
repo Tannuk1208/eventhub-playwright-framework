@@ -26,32 +26,43 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
-
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    baseURL : environment.baseUrl,
-    storageState: ".auth/user.json"
+    baseURL: environment.baseUrl,
+    // storageState removed from here so the setup project can log in from scratch
   },
-
- 
 
   /* Configure projects for major browsers */
   projects: [
+    // 1. Setup project: runs first, logs in and saves .auth/user.json
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.spec\.ts/,
+    },
+
+    // 2. Main tests: run after setup, reusing the saved login session
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: '.auth/user.json',
+      },
+      dependencies: ['setup'],
+      testIgnore: /.*\.setup\.spec\.ts/,
     },
 
     // {
     //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
+    //   use: { ...devices['Desktop Firefox'], storageState: '.auth/user.json' },
+    //   dependencies: ['setup'],
+    //   testIgnore: /.*\.setup\.spec\.ts/,
     // },
 
     // {
     //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
+    //   use: { ...devices['Desktop Safari'], storageState: '.auth/user.json' },
+    //   dependencies: ['setup'],
+    //   testIgnore: /.*\.setup\.spec\.ts/,
     // },
 
     /* Test against mobile viewports. */
@@ -80,5 +91,5 @@ export default defineConfig({
   //   command: 'npm run start',
   //   url: 'http://localhost:3000',
   //   reuseExistingServer: !process.env.CI,
-  // },
+  // },s
 });
