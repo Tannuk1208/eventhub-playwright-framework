@@ -29,6 +29,8 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     baseURL: environment.baseUrl,
+    screenshot : "only-on-failure",
+    video : "retain-on-failure"
     // storageState removed from here so the setup project can log in from scratch
   },
 
@@ -48,7 +50,7 @@ export default defineConfig({
         storageState: '.auth/user.json',
       },
       dependencies: ['setup'],
-      testIgnore: /.*\.setup\.spec\.ts/,
+      //testIgnore: /.*\.setup\.spec\.ts/,
     },
 
     // {
