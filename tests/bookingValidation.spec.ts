@@ -4,7 +4,7 @@ import { environment } from "../config/environment";
 
 invalidEmails.forEach((email) => {
 
-    test(`Invalid Email Validation - ${email}`, async ({
+    test(`Invalid Email Validation - ${email}`,   async ({
         page,
         bookingPage,
         homePage

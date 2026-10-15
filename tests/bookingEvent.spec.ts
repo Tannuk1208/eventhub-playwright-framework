@@ -29,7 +29,9 @@ test.describe("Event Booking Tests", () => {
         //await eventCard.getByTestId("book-now-btn").click();
     });
 
-    test("should book one ticket with valid customer details",
+    test("should book one ticket with valid customer details",{
+        tag: '@smoke'
+    },
         async ({ page,bookingPage }) => {
 
             await bookingPage.fillUser1Details(

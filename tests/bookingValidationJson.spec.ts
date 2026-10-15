@@ -4,7 +4,10 @@ import { environment } from "../config/environment";
 
 bookingData.invalidEmails.forEach((email) => {
 
-    test(`JSON Invalid Email - ${email}`, async ({
+    test(`JSON Invalid Email - ${email}`, {
+        tag: '@regression'
+    },
+        async ({
         page,
         bookingPage,
         homePage
