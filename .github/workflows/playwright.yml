@@ -16,7 +16,7 @@ on:
           - smoke
           - regression
   schedule:
-    - cron: '30 20 * * *' # Runs every day at midnight
+    - cron: '30 20 * * *' # 20:30 UTC = 2:00 AM IST daily (use '30 18 * * *' for 12:00 AM IST)
 jobs:
   test:
     timeout-minutes: 60
@@ -36,15 +36,13 @@ jobs:
         EVENTHUB_PASSWORD: ${{ secrets.EVENTHUB_PASSWORD }}
       run: |
         if [ "${{ github.event.inputs.testSuite }}" = "smoke" ]; then
+          echo "Running smoke tests"
           npx playwright test --grep @smoke
         elif [ "${{ github.event.inputs.testSuite }}" = "regression" ]; then
+          echo "Running regression tests"
           npx playwright test --grep @regression
         else
           echo "Running all tests"
-          npx playwright test
-        fi
-        else
-          echo "push event detected, running all tests"
           npx playwright test
         fi
     - name: Upload Playwright report
