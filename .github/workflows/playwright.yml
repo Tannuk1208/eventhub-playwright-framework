@@ -40,6 +40,11 @@ jobs:
         elif [ "${{ github.event.inputs.testSuite }}" = "regression" ]; then
           npx playwright test --grep @regression
         else
+          echo "Running all tests"
+          npx playwright test
+        fi
+        else
+          echo "push event detected, running all tests"
           npx playwright test
         fi
     - name: Upload Playwright report
