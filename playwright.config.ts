@@ -29,8 +29,8 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     baseURL: environment.baseUrl,
-    screenshot : "only-on-failure",
-    video : "retain-on-failure"
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
     // storageState removed from here so the setup project can log in from scratch
   },
 
@@ -50,7 +50,7 @@ export default defineConfig({
         storageState: '.auth/user.json',
       },
       dependencies: ['setup'],
-      //testIgnore: /.*\.setup\.spec\.ts/,
+      testIgnore: /.*\.setup\.spec\.ts/, // FIX: stops chromium from re-running the login setup test
     },
 
     // {
@@ -66,26 +66,6 @@ export default defineConfig({
     //   dependencies: ['setup'],
     //   testIgnore: /.*\.setup\.spec\.ts/,
     // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
   ],
 
   /* Run your local dev server before starting the tests */
@@ -93,5 +73,5 @@ export default defineConfig({
   //   command: 'npm run start',
   //   url: 'http://localhost:3000',
   //   reuseExistingServer: !process.env.CI,
-  // },s
+  // },
 });
