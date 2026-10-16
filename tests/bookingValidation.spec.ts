@@ -3,7 +3,7 @@ import { invalidEmails, invalidPhoneNumbers } from "../data/bookingTestData";
 import { environment } from "../config/environment";
 
 invalidEmails.forEach((email) => {
-
+//validating PR smoke pipeline
     test(`Invalid Email Validation - ${email}`,   async ({
         page,
         bookingPage,
